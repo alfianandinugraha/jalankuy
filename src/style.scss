@@ -1,0 +1,240 @@
+$main-color: #189AD3;
+$main-color-hover: #107DAC;
+
+// Resposive
+$lg: 1000px;
+$md: 700px;
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Spartan';
+    box-sizing: border-box;
+}
+
+li{
+    list-style-type: none;
+}
+
+a{
+    text-decoration: none;
+}
+
+button{
+    border: none;
+    outline: none;
+}
+
+@mixin centred-item {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+}
+
+@mixin border-card {
+    border: 1px solid #eeeeee;
+    border-radius: 10px;
+}
+
+@mixin navigation {
+    #navigation{
+        left: 50%;
+        transform: translateX(-50%);
+        position: absolute;
+        z-index: 2;
+        ol{
+            display: flex;
+            li{
+                padding: 10px;
+                a{
+                    padding: 10px;
+                    display: block;
+                    color: white;
+                    border-radius: 5px;
+
+                    &:hover{
+                        background-color: white;
+                        color: $main-color;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@mixin main-cover {
+    #main-cover{
+        height: 500px;
+        background-image: url('./image/borobudur.jpg');
+        background-position: center;
+        background-attachment: fixed;
+        object-fit: contain;
+        position: relative;
+
+        &__content{
+            @include centred-item();
+            text-align: center;
+            color: white;
+            
+            h1, p{
+                margin-bottom: 20px;
+            }
+
+            button{
+                padding: 15px 30px;
+                border-radius: 5px;
+                background-color: white;
+                color: $main-color;
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+@mixin our-services {
+    #our-services{
+        h1{
+            text-align: center;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+        ol{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            li{
+                width: (100% / 3.2);
+                padding: 20px;
+                text-align: center;
+                @include border-card();
+
+                img{
+                    width: 100px;
+                    height: 100px;
+                }
+                
+                img, h3{
+                    margin-bottom: 10px;
+                }
+
+                p{
+                    line-height: 1.5em;
+                }
+            }
+        }
+    }
+}
+
+@mixin main-banner {
+    #main-banner{
+        height: 200px;
+        background-image: url("./image/borobudur.jpg");
+        background-position: center;
+        background-attachment: fixed;
+        position: relative;
+
+        h1{
+            @include centred-item();
+            color: white;
+            z-index: 1;
+        }
+
+        &:after{
+            content: '';
+            background-color: black;
+            position: absolute;
+            width: 100%;
+            top: 0;
+            left: 0;
+            height: inherit;
+            opacity: 0.3;
+        }
+    }
+}
+
+@mixin testimonials {
+    #testimonials{
+        h1{
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        ol{
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            li{
+                width: 48%;
+                padding: 20px;
+                text-align: center;
+                @include border-card();
+                img{
+                    width: 200px;
+                    height: 200px;
+                    border-radius: 50%;
+                    margin: 0 auto;
+                }
+
+                img, i{
+                    display: block;
+                    margin-bottom: 10px;
+                    object-fit: cover;
+                }
+            }
+        }
+    }
+}
+
+@mixin footer{
+    #footer{
+        background-color: $main-color;
+        footer{
+            text-align: center;
+            padding: 20px;
+            color: white;
+        }
+    }
+}
+
+@mixin responsive {
+    @media screen and (max-width: $lg){
+        .control-width{
+            width: 100%;
+        }
+    }
+
+    @media screen and (max-width: $md) {
+        #our-services, #testimonials{
+            ol{
+                li{
+                    width: 70%;
+                    margin: 0 auto;
+                    margin-bottom: 20px;
+                }
+            }
+        }
+    }
+}
+
+#main-cover, #our-services,#main-banner, #testimonials{
+    margin-bottom: 50px;
+}
+
+.control-width{
+    width: 1000px;
+    margin: 0 auto;
+}
+
+#app{
+    @include navigation();
+    @include main-cover();
+    @include our-services();
+    @include main-banner();
+    @include testimonials();
+    @include footer();
+
+    @include responsive();
+}
+
+
+
